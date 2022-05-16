@@ -48,8 +48,8 @@ export const createProduct = async(req, res) => {
 
 export const getProducts = async (req, res) => {
     try {
-        const Room = await ProductDetails.find();
-        res.status(200).json(Room);
+        const Product = await ProductDetails.find();
+        res.status(200).json(Product);
     } catch (error){
         res.status(404).json({ message: error.message });
     }
@@ -88,5 +88,13 @@ export const deleteProduct = async (req, res) => {
 export const getProductBySearch = async (req, res) => {
     const { searchQuery } = req.query
 
-    console.log(searchQuery);
+    try {
+        const search = new RegExp(searchQuery, 'i');
+
+        const Products = await ProductDetails.find({ name: search });
+        res.json({ data: Products });
+        
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
 }
