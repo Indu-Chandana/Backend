@@ -84,3 +84,9 @@ export const deleteProduct = async (req, res) => {
 
     res.json({ message: 'Post delete successfully'});
 }
+
+export const getProductBySearch = async (req, res) => {
+    const { searchQuery } = req.query
+
+    console.log(searchQuery);
+}
